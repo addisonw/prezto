@@ -42,8 +42,6 @@ function myip() {
 }
 
 function newip() {
-    for i in ifconfig | egrep -E -e "[a-z]?(en|tun|zt)[0-9]" | grep -v inet6 | grep -v member | awk '{ print $1 }' | sed ''/:/s///''; do
-        echo "Interface: $i"
 }
 
 # myExtIP address
@@ -70,3 +68,4 @@ export PATH="/opt/local/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 ## Adding redis
 export PATH="/usr/local/redis-stable/src:$PATH"
+eval `perl -I ~/Library/perl5/lib/perl5 -Mlocal::lib=~/Library/perl5`
