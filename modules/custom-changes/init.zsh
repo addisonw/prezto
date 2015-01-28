@@ -69,3 +69,6 @@ export PATH="/usr/local/bin:$PATH"
 ## Adding redis
 export PATH="/usr/local/redis-stable/src:$PATH"
 eval `perl -I ~/Library/perl5/lib/perl5 -Mlocal::lib=~/Library/perl5`
+## Addison GOPATH and go bin
+export GOPATH="/Volumes/Data/Users/14A389/Code/golang"
+export PATH="$GOPATH/bin:$PATH"
