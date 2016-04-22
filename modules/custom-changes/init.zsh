@@ -55,6 +55,16 @@ function myextip() {
 s() { pwd > ~/.save_dir ; }
 i() { cd "$(cat ~/.save_dir)" ; }
 
+# post to pastebin
+haste() { a=$(cat); curl -X POST -s -d "$a" https://pastebin.apple.com/documents | awk -F '"' '{print "http://pastebin.apple.com/"$4}'; }
+phaste() { a=$(cat); curl -X POST -s -d "$a" http://hastebin.com/documents | awk -F '"' '{print "http://hastebin.com/"$4}'; }
+
+# Identify hardware codename
+alias hwid='/usr/local/bin/ypc2 -k RPlt | xxd -r -p'
+
+## Aliases
+alias mou='open -a Mou.app' #mou opens files in Mou.app
+alias safari='open -a Safari.app' #Safari opens files in Safari.app
 
 ## Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -70,5 +80,5 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/redis-stable/src:$PATH"
 eval `perl -I ~/Library/perl5/lib/perl5 -Mlocal::lib=~/Library/perl5`
 ## Addison GOPATH and go bin
-export GOPATH="/Volumes/Data/Users/14A389/Code/golang"
+export GOPATH="/Volumes/Data/Users/addisonwhite/src/golang"
 export PATH="$GOPATH/bin:$PATH"
