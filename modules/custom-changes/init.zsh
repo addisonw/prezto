@@ -49,6 +49,23 @@ function myextip() {
 	curl -s ipinfo.io | grep ip | awk '{ print $2 }' | sed s/\"//g | sed s/,//g
 }
 
+# ping left cart hosts
+function pingcart() {
+    for i in {201,202,203,204,209,210,211,212,217,218,219,220}; 
+    do 
+        echo "HOSTGROUP: $i";
+        for j in {0..3}; 
+        do 
+            ping -oc 2 -t 2 bats-e-$1-$i-$j.apple.com > /dev/null && echo "bats-e-$1-$i-$j -- alive" || echo "bats-e-$1-$i-$j -- DEAD------DEAD"; 
+        done; 
+    done
+}
+
+# Parse out bats-e-* hostnames
+function cartgrep() {
+    egrep -o "bats-e-([0-9]*)-([0-9]*)-[0-4]"
+}
+
 #
 ## new functions
 #
@@ -60,11 +77,12 @@ haste() { a=$(cat); curl -X POST -s -d "$a" https://pastebin.apple.com/documents
 phaste() { a=$(cat); curl -X POST -s -d "$a" http://hastebin.com/documents | awk -F '"' '{print "http://hastebin.com/"$4}'; }
 
 # Identify hardware codename
-alias hwid='/usr/local/bin/ypc2 -k RPlt | xxd -r -p'
+alias hwid='/usr/local/bin/ypc2 -k RPlt | xxd -r -p && printf "\n"'
 
 ## Aliases
 alias mou='open -a Mou.app' #mou opens files in Mou.app
 alias safari='open -a Safari.app' #Safari opens files in Safari.app
+alias cdelim='tr -s " " | cut -d " " -f 2 | tr "\n" "," | sed "s/,$//"'
 
 ## Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -82,3 +100,8 @@ eval `perl -I ~/Library/perl5/lib/perl5 -Mlocal::lib=~/Library/perl5`
 ## Addison GOPATH and go bin
 export GOPATH="/Volumes/Data/Users/addisonwhite/src/golang"
 export PATH="$GOPATH/bin:$PATH"
+# BATS Exports
+export BATS_USERNAME="addison_white"
+export BATS_RADAR_REQUIRED=0
+# Setup Conda exports
+# export PATH="/Volumes/Data/Users/addisonwhite/anaconda/bin:$PATH"
