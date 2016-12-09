@@ -79,7 +79,7 @@ s() { pwd >! ~/.save_dir ; }
 i() { cd "$(cat ~/.save_dir)" ; }
 
 # post to pastebin
-haste() { a=$(cat); curl -X POST -s -d "$a" https://pastebin.apple.com/documents | awk -F '"' '{print "http://pastebin.apple.com/"$4}'; }
+haste() { a=$(cat); curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "http://hastebin.com/"$4}'; }
 phaste() { a=$(cat); curl -X POST -s -d "$a" http://hastebin.com/documents | awk -F '"' '{print "http://hastebin.com/"$4}'; }
 
 # Identify hardware codename
