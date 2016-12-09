@@ -49,15 +49,21 @@ function myextip() {
 	curl -s ipinfo.io | grep ip | awk '{ print $2 }' | sed s/\"//g | sed s/,//g
 }
 
+# Create workspace and cd to it
+function mkws() {
+    mkdir -p ~/Desktop/WSHOME/WS$(date "+%m%d%Y") && cd ~/Desktop/WSHOME/WS$(date "+%m%d%Y")
+}
+export PWS=$HOME/Desktop/WSHOME/WS$(date "+%m%d%Y") 
+
 # ping left cart hosts
 function pingcart() {
-    for i in {201,202,203,204,209,210,211,212,217,218,219,220}; 
-    do 
+    for i in {201,202,203,204,209,210,211,212,217,218,219,220};
+    do
         echo "HOSTGROUP: $i";
-        for j in {0..3}; 
-        do 
-            ping -oc 2 -t 2 bats-e-$1-$i-$j.apple.com > /dev/null && echo "bats-e-$1-$i-$j -- alive" || echo "bats-e-$1-$i-$j -- DEAD------DEAD"; 
-        done; 
+        for j in {0..3};
+        do
+            ping -oc 2 -t 2 bats-e-$1-$i-$j.apple.com > /dev/null && echo "bats-e-$1-$i-$j -- alive" || echo "bats-e-$1-$i-$j -- DEAD------DEAD";
+        done;
     done
 }
 
@@ -69,7 +75,7 @@ function cartgrep() {
 #
 ## new functions
 #
-s() { pwd > ~/.save_dir ; }
+s() { pwd >! ~/.save_dir ; }
 i() { cd "$(cat ~/.save_dir)" ; }
 
 # post to pastebin
@@ -80,7 +86,7 @@ phaste() { a=$(cat); curl -X POST -s -d "$a" http://hastebin.com/documents | awk
 alias hwid='/usr/local/bin/ypc2 -k RPlt | xxd -r -p && printf "\n"'
 
 ## Aliases
-alias mou='open -a Mou.app' #mou opens files in Mou.app
+alias mou='open -a MacDown.app' #mou opens files in Mou.app
 alias safari='open -a Safari.app' #Safari opens files in Safari.app
 alias cdelim='tr -s " " | cut -d " " -f 2 | tr "\n" "," | sed "s/,$//"'
 
@@ -105,3 +111,13 @@ export BATS_USERNAME="addison_white"
 export BATS_RADAR_REQUIRED=0
 # Setup Conda exports
 # export PATH="/Volumes/Data/Users/addisonwhite/anaconda/bin:$PATH"
+# Add ~/bin to PATH
+export PATH="/Volumes/Data/Users/addisonwhite/bin:$PATH"
+# Nirdroot Key
+export NIRDROOT_KEY="f0217023c0104235b342346ecd594667"
+export GOVAIN_TOKEN="f9ec-efcb-11eb"
+export PROJECT_HOME="$HOME/src"
+# if [[ "$(ls ~addison_white/bin | wc -l)" -gt 10 ]]
+# then
+#     export PATH="$PATH:/Network/Servers/nwna40a.apple.com/vol/homedir3/addison_white/bin"
+# fi
